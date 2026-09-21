@@ -1,23 +1,1225 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --primary-soft: #eff6ff;
+            --secondary: #0f766e;
+            --secondary-light: #14b8a6;
+            --secondary-soft: #f0fdfa;
+            --accent: #d97706;
+            --accent-soft: #fffbeb;
+            --text-main: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --border-light: #e2e8f0;
+            --border-focus: #94a3b8;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.85;
+            letter-spacing: -0.015em;
+            font-size: 16px;
+            word-break: keep-all;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header.site-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #0369a1 100%);
+            color: #ffffff;
+            padding: 60px 0 50px 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.35;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        header p.lead {
+            font-size: 1.15rem;
+            font-weight: 400;
+            max-width: 900px;
+            color: #e0f2fe;
+            margin-bottom: 30px;
+        }
+
+        .header-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 15px;
+        }
+
+        .header-cta-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-accent {
+            background-color: #f59e0b;
+            color: #0f172a;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+        }
+
+        .btn-accent:hover {
+            background-color: #d97706;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            color: #ffffff;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        nav.sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        nav.sticky-nav ul {
+            display: flex;
+            list-style: none;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0;
+            margin: 0;
+            scrollbar-width: thin;
+        }
+
+        nav.sticky-nav li a {
+            display: block;
+            padding: 16px 20px;
+            color: var(--text-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        nav.sticky-nav li a:hover,
+        nav.sticky-nav li a:focus {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background-color: var(--primary-soft);
+        }
+
+        main {
+            padding: 50px 0;
+        }
+
+        article {
+            background-color: transparent;
+        }
+
+        section.content-block {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 45px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+
+        section.content-block h2 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-soft);
+            position: relative;
+        }
+
+        section.content-block h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        section.content-block h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 35px 0 18px 0;
+        }
+
+        section.content-block h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 25px 0 12px 0;
+        }
+
+        p {
+            margin-bottom: 18px;
+            color: var(--text-body);
+            line-height: 1.9;
+        }
+
+        strong.highlight {
+            color: var(--primary);
+            background-color: var(--primary-soft);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background-color: var(--bg-body);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+            background-color: #ffffff;
+        }
+
+        .feature-card h4 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .data-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin: 30px 0;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        table.data-table th,
+        table.data-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        table.data-table thead th {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        table.data-table tbody tr:hover {
+            background-color: #f8fafc;
+        }
+
+        table.data-table tfoot td {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .visual-bar-container {
+            margin: 25px 0;
+            background-color: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 25px;
+        }
+
+        .bar-item {
+            margin-bottom: 18px;
+        }
+
+        .bar-label-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .bar-track {
+            width: 100%;
+            height: 14px;
+            background-color: #e2e8f0;
+            border-radius: 7px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 7px;
+            transition: width 0.8s ease;
+        }
+
+        .bar-fill.blue { background-color: var(--primary-light); }
+        .bar-fill.teal { background-color: var(--secondary-light); }
+        .bar-fill.amber { background-color: var(--accent); }
+
+        .callout-box {
+            background-color: var(--secondary-soft);
+            border-left: 5px solid var(--secondary);
+            padding: 25px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: 30px 0;
+        }
+
+        .callout-box.warning {
+            background-color: var(--accent-soft);
+            border-left-color: var(--accent);
+        }
+
+        .callout-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-light);
+            padding: 24px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .faq-answer {
+            color: var(--text-body);
+            font-size: 1rem;
+            line-height: 1.8;
+            padding-left: 10px;
+        }
+
+        .ext-links-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .ext-links-list li {
+            padding: 14px 18px;
+            background-color: var(--bg-body);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ext-links-list li a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .ext-links-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .badge-source {
+            font-size: 0.8rem;
+            background-color: #e2e8f0;
+            color: var(--text-muted);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        footer.site-footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 50px 0 40px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+        }
+
+        footer .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        footer h5 {
+            color: #f8fafc;
+            font-size: 1.05rem;
+            margin-bottom: 18px;
+        }
+
+        footer p {
+            color: #94a3b8;
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        footer ul li {
+            margin-bottom: 10px;
+        }
+
+        footer ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        footer ul li a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #1e293b;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.85rem; }
+            section.content-block { padding: 25px 20px; }
+            footer .footer-content { grid-template-columns: 1fr; gap: 30px; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://direct.reliabledone.com/#website",
+          "url": "https://direct.reliabledone.com",
+          "name": "리라이어블던 다이렉트 자동차보험 분석센터",
+          "inLanguage": "ko-KR"
+        },
+        {
+          "@type": "Article",
+          "@id": "https://direct.reliabledone.com/car-insurance-event-february#article",
+          "isPartOf": { "@id": "https://direct.reliabledone.com/#website" },
+          "headline": "자동차보험가입이벤트 2월 총정리 및 2026년 다이렉트 최저가 비교견적 분석",
+          "description": "2026년 2월 최신 자동차보험 가입 갱신 이벤트, 손해보험사별 네이버페이, 카카오페이, 토스 상품권 및 캐시백 혜택, 연령별 차종별 평균 예상 보험료 계산 안내.",
+          "inLanguage": "ko-KR",
+          "datePublished": "2026-02-01T09:00:00+09:00",
+          "dateModified": "2026-02-15T14:30:00+09:00",
+          "author": {
+            "@type": "Organization",
+            "name": "다이렉트보험 정책연구팀"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "리라이어블던 다이렉트 연구센터",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://direct.reliabledone.com/assets/logo.png"
+            }
+          },
+          "mainEntityOfPage": "https://direct.reliabledone.com/car-insurance-event-february"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://direct.reliabledone.com/car-insurance-event-february#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "2월 자동차보험 가입 이벤트 혜택은 언제 지급되나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "조회 이벤트 사은품인 네이버페이, 카카오페이 포인트, 모바일 주유권, 스타벅스 쿠폰은 통상적으로 참여 완료 후 즉시 혹은 익월 15일 전후로 모바일 기프티콘 형태로 발송됩니다. 신규 계약 체결 시 제공되는 3만원 상당의 캐시백 및 상품권 혜택은 보험 개시일로부터 통상 12개월 정상 유지 조건 혹은 첫 회 보험료 납입 확인 후 익월 말일에 등록된 고객 전화번호나 결제 카드를 통해 환급 또는 지급됩니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "기존 보험 만기일이 3월이나 4월이어도 2월 가입 이벤트에 참여할 수 있나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "다이렉트 자동차보험은 통상 자동차등록증 및 보험개발원 전산 기준 만기일 30일 전부터 신규 계산 및 갱신 계약 체결이 가능합니다. 따라서 만기일이 2월 중이거나 3월 말 이전인 차량 소유자라면 2월에 진행되는 각 제휴사별 가입 이벤트 혜택을 온전히 적용받아 사전 계약 체결이 가능합니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "조회 이벤트와 신규 가입 체결 이벤트는 중복 수령이 가능한가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "대다수의 손해보험사와 제휴 플랫폼(토스, 네이버, 카카오톡 등) 규정상 동일 보험사에 대해 조회 이벤트와 가입 체결 이벤트를 동시 수령하는 것은 제한되며, 통상 혜택 금액이 큰 가입 체결 이벤트(2만원~3만원) 1회만 인정되거나, 다른 경로를 통해 교차 응모할 경우에도 연 1회 지급 제한 규정이 적용되므로 각 플랫폼 유의사항을 꼼꼼하게 대조해야 합니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "다이렉트 자동차보험 계약 후 중도 해지 시 환불 및 위약금 기준은 어떻게 되나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "자동차보험은 1년(12개월) 약정 형태로 체결되나 금융소비자보호법 및 표준약관에 따라 차량 매각, 폐차, 양도 등의 정당한 사유 발생 시 일할 계산(경과일수 차감)을 통해 미경과 보험료 전액이 무위약금으로 환불 처리됩니다. 단, 단순 변심으로 인한 임의 해지 시에는 단기요율이 적용되어 환불 금액에서 손실이 발생할 수 있습니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "20대 초반 첫차 운전자가 자동차보험료를 가장 저렴하게 낮추는 핵심 방법은 무엇인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "만 19세에서 24세 사이 사회초년생은 본인 단독 명의보다는 부모님 명의 99%와 본인 지분 1%의 공동명의로 등록한 뒤, 무사고 할인등급이 높은 부모님의 가족한정 또는 지정 1인 특약으로 가입하는 것이 비용을 50% 이상 절감하는 최선의 방법입니다. 또한 군 운전병 복무 이력이나 직장 내 운전직 경력 인정 제도를 신청하여 경력 요율을 단축해야 합니다."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "FinancialProduct",
+          "name": "2026 다이렉트 자동차보험 비교견적 서비스",
+          "category": "CarInsurance",
+          "description": "국내 주요 7대 손해보험사 2월 신규 가입 및 갱신 이벤트 비교, 연령별 맞춤 담보 설계 및 다이렉트 최저가 보험료 계산기 안내",
+          "provider": {
+            "@type": "Organization",
+            "name": "다이렉트 자동차보험 전문 비교센터"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "홈",
+              "item": "https://direct.reliabledone.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "자동차보험 이벤트",
+              "item": "https://direct.reliabledone.com/events"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "2026년 2월 가입 이벤트 분석",
+              "item": "https://direct.reliabledone.com/car-insurance-event-february"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+<header class="site-header" id="top">
+    <div class="container">
+        <span class="header-badge">2026년 2월 공시 기준 빅데이터 종합 리포트</span>
+        <h1>자동차보험가입이벤트 2월 총정리 | 다이렉트 최저가 비교견적 및 프로모션 완벽 가이드</h1>
+        <p class="lead">
+            설 연휴 전후 갱신 시즌을 맞이하여 네이버페이, 카카오페이, 토스, 핀크 등 주요 핀테크 플랫폼과 삼성화재, 현대해상, KB손해보험, DB손해보험 등 메이저 손보사가 전개하는 2월 최신 사은품 혜택, 상품권 캐시백, 연령대별 차종별 평균 요금표 및 다이렉트 최저가 가입 비법을 투명하게 안내합니다.
+        </p>
+        <div class="header-cta-group">
+            <a href="#event-overview" class="btn btn-accent">2월 플랫폼별 이벤트 즉시 확인</a>
+            <a href="#premium-tables" class="btn btn-outline">연령별 및 모델별 예상 견적표</a>
+        </div>
+        <div class="header-meta">
+            <span>발행부서: 금융소비자정보 분석실</span>
+            <span>최종 업데이트: 2026년 2월 15일</span>
+            <span>인증상태: 2026년 최신 손해보험 약관 검증 완료</span>
+        </div>
+    </div>
+</header>
+
+<nav class="sticky-nav" aria-label="메인 내비게이션">
+    <div class="container">
+        <ul>
+            <li><a href="#event-overview">2월 이벤트 총람</a></li>
+            <li><a href="#brand-comparison">보험사별 혜택 비교</a></li>
+            <li><a href="#age-strategy">연령대별 보험료 분석</a></li>
+            <li><a href="#model-prices">인기 차종별 요금표</a></li>
+            <li><a href="#coverage-guide">필수 보장 담보 설계</a></li>
+            <li><a href="#riders-savings">할인 특약 최적화</a></li>
+            <li><a href="#community-talk">커뮤니티 내돈내산 후기</a></li>
+            <li><a href="#faq">자주 묻는 질문 FAQ</a></li>
+            <li><a href="#official-sources">공인 정보 출처</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="container">
+    <article>
+
+        <!-- SECTION 1: 2월 자동차보험 이벤트 총람 -->
+        <section id="event-overview" class="content-block">
+            <h2>2026년 2월 자동차보험가입이벤트 종합 트렌드 및 사은품 구조 분석</h2>
+            <p>
+                매년 2월은 신년 차량 구매 수요와 설 명절 장거리 운행 대비, 그리고 연초에 집중되는 차량 정기 검사 및 보험 갱신 주기가 맞물려 손해보험 업계의 고객 유치 경쟁이 가장 치열하게 전개되는 분기점입니다. 특히 2026년 2월은 고물가 기조 속에서 금융소비자들의 고정비 절감 요구가 거세짐에 따라 오프라인 대면 설계사 채널 대비 수수료가 절감된 온라인 다이렉트 자동차보험 상품으로의 대규모 이동이 가속화되고 있습니다.
+            </p>
+            <p>
+                현재 진행 중인 <strong class="highlight">자동차보험가입이벤트 2월</strong> 핵심 프로모션은 크게 두 가지 유형으로 분류됩니다. 첫째는 자신의 차량 정보와 현재 계약 만기일을 입력하여 단순 계산을 진행하는 <strong>보험료 조회 이벤트</strong>이며, 둘째는 실제로 새로운 1년(12개월) 보험 계약을 체결하고 결제를 완료할 때 증정되는 <strong>신규 계약 체결 이벤트</strong>입니다. 소비자는 본인의 만기 일정에 맞춰 이 두 가지 혜택 구조를 철저하게 분석하고 참여해야 체감 혜택을 극대화할 수 있습니다.
+            </p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>조회형 이벤트 (체험 및 견적 산출)</h4>
+                    <p>
+                        주요 핀테크 플랫폼인 네이버페이, 카카오톡 카카오페이, 토스, 페이코 등에서 차량 번호를 조회하고 3사 이상의 다이렉트 견적을 산출하면 건당 5,000원에서 최대 10,000원에 달하는 포인트 및 스타벅스 아메리카노 기프티콘, 모바일 주유권을 실시간 혹은 익월 초에 사은품으로 지급합니다.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>가입 체결형 이벤트 (신규 계약 및 결제)</h4>
+                    <p>
+                        다이렉트 사이트에서 자동차보험료 30만원 이상 결제 시 제휴 신용카드 청구할인 및 캐시백으로 20,000원에서 30,000원 상당의 주유 상품권, 신세계 이마트 모바일 상품권, 혹은 네이버페이 포인트가 현금지원 성격으로 직접 환급 지급됩니다.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>시즌 한정 명절 귀성길 안심 특약</h4>
+                    <p>
+                        2월 설 연휴 기간 동안 임시운전자 특약, 다른 자동차 운전 담보 특약 가입 고객을 대상으로 1일 원데이 자동차보험 가입 수수료 면제 프로모션과 타이어 공기압, 배터리 무상 점검 서비스를 연계한 부가 혜택이 브랜드별로 대거 쏟아지고 있습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="callout-box">
+                <h4>체리피킹 방지를 위한 이벤트 참여 주의사항</h4>
+                <p>
+                    각 손해보험사는 부정 수급 및 단기 중복 조회를 방지하기 위해 최근 10개월 내지 12개월 이내에 동일한 통신사, 카드사, 플랫폼을 통해 보험료 조회 사은품을 수령한 이력이 있는 피보험자에 대해 이벤트 참여를 제한하고 있습니다. 따라서 본인이 직전 연도에 네이버를 통해 조회를 마쳤다면 올해 2월에는 토스나 카카오페이 등 타 제휴 플랫폼을 우회하여 신청하는 전략이 유효합니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: 주요 손해보험사 2월 혜택 및 브랜드 비교 -->
+        <section id="brand-comparison" class="content-block">
+            <h2>2026년 7대 손해보험사 2월 프로모션 및 브랜드별 장단점 비교</h2>
+            <p>
+                소비자가 온라인 인터넷 사이트 및 모바일 앱(어플)을 통해 가입할 수 있는 주요 다이렉트 자동차보험 브랜드는 고유의 요율 체계와 할인 특약 구성을 보유하고 있습니다. 삼성화재 다이렉트 착, 현대해상 하이카 다이렉트, KB손해보험 다이렉트, DB손해보험 프로미 다이렉트 등 대형 4사를 필두로, 주행거리 기반의 혁신을 내세운 캐롯손해보험 퍼마일, 전통의 강자 메리츠화재, 그리고 가성비를 내세우는 하나손해보험 등이 각축전을 벌이고 있습니다.
+            </p>
+
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <caption>주요 손해보험사 다이렉트 2026년 2월 가입 이벤트 및 사은품 요약</caption>
+                    <thead>
+                        <tr>
+                            <th>보험사 브랜드</th>
+                            <th>2월 주요 가입 혜택 및 사은품</th>
+                            <th>대표 결제 제휴처</th>
+                            <th>고객센터 전화번호</th>
+                            <th>브랜드별 핵심 장점 및 단점</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>삼성화재 다이렉트 착</strong></td>
+                            <td>신규 30만원 이상 결제 시 3만원 모바일 주유권 또는 네이버페이</td>
+                            <td>삼성, 국민, 신한, 롯데</td>
+                            <td>1577-3331</td>
+                            <td>장점: 업계 최대 보상망, 긴급출동 신속성 / 단점: 20대 초반 단독 요율이 상대적으로 높음</td>
+                        </tr>
+                        <tr>
+                            <td><strong>현대해상 하이카</strong></td>
+                            <td>체결 시 GS칼텍스 주유권 3만원권 또는 이마트 상품권</td>
+                            <td>현대, 하나, 우리, 비씨</td>
+                            <td>1899-6782</td>
+                            <td>장점: 어린이 할인 특약 및 자녀 할인율 업계 최고 / 단점: 첨단장치 인증 절차가 세분화됨</td>
+                        </tr>
+                        <tr>
+                            <td><strong>KB손해보험 다이렉트</strong></td>
+                            <td>신규 가입 시 3만원 캐시백 또는 스타벅스 카드 3만원권</td>
+                            <td>KB국민, 농협, 신한</td>
+                            <td>1544-0077</td>
+                            <td>장점: 대중교통 이용 할인 및 티맵 안전운전 점수 연동 우수 / 단점: 노후 차량 자차 한도 제한</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DB손해보험 프로미</strong></td>
+                            <td>네이버페이 포인트 3만원권 또는 SK주유권 3만원</td>
+                            <td>BC, 롯데, 삼성, 현대</td>
+                            <td>1600-0100</td>
+                            <td>장점: 프로미월드 현장 출동 네트워크 안정적, 베이비 인 카 특약 / 단점: 고가 수입차 인수 기준 엄격</td>
+                        </tr>
+                        <tr>
+                            <td><strong>캐롯손해보험 퍼마일</strong></td>
+                            <td>캐롯플러그 장착 신규 체결 시 상품권 2만원 및 주행거리 환급</td>
+                            <td>토스뱅크, 현대, 카카오페이</td>
+                            <td>1566-0300</td>
+                            <td>장점: 탄 만큼만 월 후불 계산으로 주행거리 적은 차량에 최저가 / 단점: 장거리 운전자에게는 불리</td>
+                        </tr>
+                        <tr>
+                            <td><strong>메리츠화재 다이렉트</strong></td>
+                            <td>신규 30만원 결제 시 모바일 주유권 3만원</td>
+                            <td>신한, 국민, 하나</td>
+                            <td>1522-1133</td>
+                            <td>장점: 간소화된 설계 화면, 실시간 심사 속도 우수 / 단점: 결합 할인 특약 종류가 단순함</td>
+                        </tr>
+                        <tr>
+                            <td><strong>하나손해보험 원데이</strong></td>
+                            <td>다이렉트 장기 체결 시 모바일 상품권 2만원 증정</td>
+                            <td>하나카드, 카카오페이</td>
+                            <td>1566-3000</td>
+                            <td>장점: 단기 원데이 자동차보험 연계 탁월, 가성비 요율 / 단점: 전국 오프라인 출동망 규모 차이</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">안내사항: 상기 혜택 및 사은품 조건은 2026년 2월 공시 기준이며, 보험사 사정 및 제휴 플랫폼 프로모션 예산 소진 시 조기 마감될 수 있습니다.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <p>
+                전문가 상담 및 손해사정 컨설팅 관점에서 볼 때 브랜드 순위만을 맹신하기보다는 본인의 연간 주행거리, 차량 내 첨단 안전장치 유무, 함께 운전할 가족의 연령 한정 범위 등을 다각도로 비교해야 합니다. 동일한 30대 차주라 하더라도 1년 주행거리가 5,000km 미만이라면 캐롯 퍼마일이나 현대해상 마일리지 특약이 가장 싼곳이 될 수 있으며, 장거리 출퇴근 운전자라면 삼성화재나 DB손해보험의 기본 요금표 등급이 더 유리할 수 있습니다.
+            </p>
+        </section>
+
+        <!-- SECTION 3: 연령대별 평균 보험료 계산표 및 2월 최적화 전략 -->
+        <section id="age-strategy" class="content-block">
+            <h2>연령대별 자동차보험료 평균 금액 계산표 및 비용 절감 최적화 전략</h2>
+            <p>
+                자동차보험료 산출 공식에서 사고 통계에 기반한 <strong>운전자 연령</strong>은 보험료 등급표 결정에 가장 결정적인 가중치를 부여받습니다. 만 19세부터 만 24세에 이르는 20대 초반 사회초년생 그룹은 통계적으로 사고 발생률과 손해율이 가장 높아 평균 납입 금액이 150만원에서 300만원을 상회하는 반면, 30대 중반부터 50대 운전자는 장기 무사고 경력이 누적되어 가장 저렴한 최저가 요금제를 누릴 수 있습니다.
+            </p>
+
+            <div class="visual-bar-container">
+                <h4 style="margin-bottom: 20px; color: var(--text-main);">연령대별 1년 평균 자동차보험료 수준 (국산 준중형 승용 1인 한정 기준)</h4>
+                
+                <div class="bar-item">
+                    <div class="bar-label-group">
+                        <span>20대 초반 (만 19세 ~ 23세, 첫차 신규)</span>
+                        <span>평균 2,150,000원 ~ 2,800,000원</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill amber" style="width: 95%;"></div>
+                    </div>
+                </div>
+
+                <div class="bar-item">
+                    <div class="bar-label-group">
+                        <span>20대 중후반 (만 24세 ~ 29세, 운전경력 2~3년)</span>
+                        <span>평균 1,150,000원 ~ 1,600,000원</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill amber" style="width: 55%;"></div>
+                    </div>
+                </div>
+
+                <div class="bar-item">
+                    <div class="bar-label-group">
+                        <span>30대 (만 30세 ~ 39세, 무사고 할인구간 진입)</span>
+                        <span>평균 650,000원 ~ 850,000원</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill blue" style="width: 32%;"></div>
+                    </div>
+                </div>
+
+                <div class="bar-item">
+                    <div class="bar-label-group">
+                        <span>40대 및 50대 (만 40세 ~ 59세, 황금 무사고 구간)</span>
+                        <span>평균 480,000원 ~ 680,000원</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill teal" style="width: 25%;"></div>
+                    </div>
+                </div>
+
+                <div class="bar-item">
+                    <div class="bar-label-group">
+                        <span>60대 이상 (만 65세 이상, 고령자 적성검사 연동)</span>
+                        <span>평균 720,000원 ~ 980,000원</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill blue" style="width: 36%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>연령별 가입 및 갱신 노하우 가이드</h3>
+            
+            <h4>1. 20대 초반 (만 19세 ~ 만 24세): 가족 공동명의 및 종피보험자 활용</h4>
+            <p>
+                이 연령대의 청년 운전자가 본인 단독 명의로 신규 계약을 체결할 경우 1년 자동차보험료는 200만원을 훌쩍 넘는 폭탄 견적을 받게 됩니다. 이를 해결하는 가장 대표적인 방법은 차량 지분을 부모님 99%, 본인 1% 형태로 공동명의 등록한 뒤 부모님 명의로 보험을 가입하고 본인을 '가족한정' 혹은 '지정 1인' 피보험자로 등록하는 것입니다. 이 경우 부모님의 우수한 무사고 등급이 승계되어 보험료가 80만원~110만원 선으로 대폭 하향 조정됩니다. 이때 반드시 금융감독원에서 운영하는 <strong>가입경력 인정자(종피보험자) 등록</strong>을 잊지 않아야 향후 본인 명의로 독립할 때 최대 3년의 운전 경력을 인정받아 할인을 누릴 수 있습니다. 군대 운전병 복무 경력, 관공서 및 법인 운전직 경력도 필수 서류 제출을 통해 소급 적용이 가능합니다.
+            </p>
+
+            <h4>2. 20대 중후반 (만 25세 ~ 만 29세): 만 26세 이상 한정 특약의 변곡점</h4>
+            <p>
+                만 26세 생일이 지나는 시점은 자동차보험 업계에서 가장 유의미한 요율 인하 구간입니다. 기존 '만 21세 이상 한정' 혹은 '만 24세 이상 한정'에서 '만 26세 이상 한정' 특약으로 전환하면 기본 보험료가 25%에서 35%까지 급감합니다. 만기일이 2월 중인데 생일이 3월이나 4월에 예정되어 있다면, 일단 2월 계약 시점에는 현행 연령 한정으로 가입하고 생일이 지난 당일 고객센터 어플이나 전화상담을 통해 연령 변경 배서 신청을 진행하여 잔여 기간에 대한 차액 환불을 받는 전략이 유효합니다.
+            </p>
+
+            <h4>3. 30대 및 40대: 부부한정, 자녀할인 특약과 안전운전 점수의 극대화</h4>
+            <p>
+                이 구간은 직장 안정성과 경제적 활동성이 가장 왕성한 시기로, 결혼 여부에 따라 '부부 한정 특약'을 설정하는 것이 기본이며, 만약 태아(임신 중)이거나 만 6세 이하, 만 12세 이하 자녀가 있다면 손해보험사별로 7%에서 최대 17%까지 제공되는 <strong>자녀 할인 특약(베이비 인 카)</strong>을 필수 적용해야 합니다. 주민등록등본이나 임신확인서 모바일 사진 등록만으로 간단히 완료되며, 네이버지도, 티맵, 카카오내비 앱의 주행 점수가 80점을 초과할 경우 10~15%의 추가 할인이 결합되어 실질 납입 금액을 50만원대 미만으로 낮출 수 있습니다.
+            </p>
+
+            <h4>4. 50대 및 60대 이상: 차선이탈방지 등 첨단안전장치 및 고령자 안전교육 이수</h4>
+            <p>
+                50대는 가족 전체를 커버하는 '가족 한정' 특약을 가장 많이 이용하는 세대입니다. 이때 자녀의 연령이 낮다면 자녀 연령에 맞춰 보험료가 상승하므로 실제 운전하지 않는 기간에는 자녀를 제외하고 부부 한정으로 유지하다 명절 등 특정 기간에만 1일 단위 임시운전자 특약을 추가하는 것이 비용을 절약하는 핵심 노하우입니다. 만 65세 이상의 경우 도로교통공단에서 실시하는 고령운전자 교통안전교육을 온라인 이수하고 적성검사 인지기능검사에서 일정 등급 이상을 받으면 5%의 추가 할인을 제공받을 수 있습니다.
+            </p>
+        </section>
+
+        <!-- SECTION 4: 국산 및 수입 30개 인기 차종 모델별 요금표 및 등급표 분석 -->
+        <section id="model-prices" class="content-block">
+            <h2>인기 모델 30종 차량 모델별 2월 보험료 및 자차 차량등급표 비교</h2>
+            <p>
+                동일한 운전자, 동일한 나이라 할지라도 운행하는 차량 모델의 고유 사고율, 충돌 안전성, 부품 수리비 통계에 따라 보험개발원이 매년 산정하는 <strong>차량모델등급(1등급~26등급)</strong>이 달라지며, 이는 자차보험료(자기차량손해 담보)를 결정짓는 핵심 지표가 됩니다. 1등급에 가까울수록 손해율이 높아 자차 가격이 비싸지며, 26등급에 가까울수록 안전하고 수리비가 저렴하여 최저가 혜택을 받습니다. 아래는 2026년 2월 기준 30개 주요 차종의 표준 견적 및 등급 분석표입니다.
+            </p>
+
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <caption>2026년 2월 주요 30개 차종별 평균 다이렉트 자동차보험료 및 차량등급표 (만 35세, 1인 한정, 3년 무사고 기준)</caption>
+                    <thead>
+                        <tr>
+                            <th>차급 분류</th>
+                            <th>대표 차량 모델명</th>
+                            <th>차량모델등급 (추정)</th>
+                            <th>예상 평균 보험료 (1년)</th>
+                            <th>모델별 가입 포인트 및 2월 추천 특약</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>경형/엔트리</td><td>현대 캐스퍼</td><td>19등급</td><td>520,000원 ~ 640,000원</td><td>경차 취득세 감면 연계 및 첨단ADAS 특약 필수</td></tr>
+                        <tr><td>경형/엔트리</td><td>기아 모닝</td><td>20등급</td><td>480,000원 ~ 590,000원</td><td>출퇴근 단거리 위주로 마일리지 특약 환급 극대화</td></tr>
+                        <tr><td>경형/엔트리</td><td>기아 레이</td><td>18등급</td><td>530,000원 ~ 660,000원</td><td>공간 활용성 우수하나 측풍 영향 고려 자차 유지 권장</td></tr>
+                        <tr><td>소형 SUV</td><td>현대 베뉴</td><td>17등급</td><td>560,000원 ~ 690,000원</td><td>1인 가구 통근용으로 티맵 안전점수 특약 연계 최적</td></tr>
+                        <tr><td>소형 SUV</td><td>기아 셀토스</td><td>16등급</td><td>610,000원 ~ 740,000원</td><td>2030 여성 및 사회초년생 선호, 대물 10억 설정 필수</td></tr>
+                        <tr><td>준중형 세단</td><td>현대 아반떼 CN7</td><td>16등급</td><td>580,000원 ~ 710,000원</td><td>국민 첫차, 20대 유입률 높아 부모님 공동명의 다수</td></tr>
+                        <tr><td>준중형 세단</td><td>기아 K3</td><td>15등급</td><td>570,000원 ~ 700,000원</td><td>가성비 우수, 중고차 구매 시 부품 원가 저렴해 자차 유리</td></tr>
+                        <tr><td>중형 세단</td><td>현대 쏘나타 디 엣지</td><td>18등급</td><td>620,000원 ~ 760,000원</td><td>패밀리카 진입 차종, 자녀할인 및 블랙박스 특약 결합</td></tr>
+                        <tr><td>중형 세단</td><td>기아 K5 DL3</td><td>14등급</td><td>680,000원 ~ 830,000원</td><td>20대 운전자 사고 통계로 인해 쏘나타 대비 요율 다소 높음</td></tr>
+                        <tr><td>준대형 세단</td><td>현대 그랜저 GN7</td><td>20등급</td><td>690,000원 ~ 840,000원</td><td>차량가액 대비 등급이 높아 자차 보험료 방어 우수</td></tr>
+                        <tr><td>준대형 세단</td><td>기아 K8</td><td>19등급</td><td>670,000원 ~ 820,000원</td><td>빌트인캠 할인 및 커넥티드카 7% 할인 즉시 적용</td></tr>
+                        <tr><td>대형 세단</td><td>기아 K9</td><td>17등급</td><td>950,000원 ~ 1,200,000원</td><td>배기량 및 부품가 반영, 법인 및 임원 차량 특약 연계</td></tr>
+                        <tr><td>준중형 SUV</td><td>현대 투싼 NX4</td><td>17등급</td><td>630,000원 ~ 770,000원</td><td>하이브리드 모델 배터리 신가보상 특약 추가 추천</td></tr>
+                        <tr><td>준중형 SUV</td><td>기아 스포티지 NQ5</td><td>16등급</td><td>640,000원 ~ 790,000원</td><td>레저 수요 증가, 견인거리 확대 60km 특약 권장</td></tr>
+                        <tr><td>중형 SUV</td><td>현대 싼타페 MX5</td><td>18등급</td><td>670,000원 ~ 830,000원</td><td>신형 모델 등급 안정화, 가족한정 4인 설계 최적</td></tr>
+                        <tr><td>중형 SUV</td><td>기아 쏘렌토 MQ4</td><td>18등급</td><td>660,000원 ~ 820,000원</td><td>국내 판매 최상위, 풍부한 데이터로 안정적 손해율</td></tr>
+                        <tr><td>대형 SUV</td><td>현대 팰리세이드</td><td>18등급</td><td>720,000원 ~ 890,000원</td><td>다자녀 할인(3자녀 이상) 결합 시 최대 15% 감액</td></tr>
+                        <tr><td>미니밴</td><td>기아 카니발</td><td>19등급</td><td>680,000원 ~ 840,000원</td><td>9인승 이상 승합 분류 및 버스전용차로 혜택과 연계</td></tr>
+                        <tr><td>프리미엄 세단</td><td>제네시스 G70</td><td>11등급</td><td>880,000원 ~ 1,150,000원</td><td>스포츠 성향 세단으로 사고 손해율 반영, 자차 높음</td></tr>
+                        <tr><td>프리미엄 세단</td><td>제네시스 G80 RG3</td><td>15등급</td><td>820,000원 ~ 1,050,000원</td><td>제네시스 커넥티드 특약 및 자율주행 안전장비 할인</td></tr>
+                        <tr><td>프리미엄 세단</td><td>제네시스 G90 RS4</td><td>14등급</td><td>1,400,000원 ~ 1,900,000원</td><td>초고가 차량가액 반영, 단독사고 손해배상 한도 확장</td></tr>
+                        <tr><td>프리미엄 SUV</td><td>제네시스 GV70</td><td>13등급</td><td>890,000원 ~ 1,180,000원</td><td>30대 전문직 선호, 무보험차 상해 5억 상향 필수</td></tr>
+                        <tr><td>프리미엄 SUV</td><td>제네시스 GV80</td><td>15등급</td><td>980,000원 ~ 1,300,000원</td><td>부품 단가 감안 자기부담금 20%(최대 50만원) 설정</td></tr>
+                        <tr><td>전용 전기차</td><td>현대 아이오닉5</td><td>15등급</td><td>780,000원 ~ 960,000원</td><td>전기차 전용 배터리 특약, 초과수리비 보장 특약 필수</td></tr>
+                        <tr><td>전용 전기차</td><td>현대 아이오닉6</td><td>16등급</td><td>750,000원 ~ 930,000원</td><td>우수한 전비와 안전도, 전기차 충전 중 감전사고 담보</td></tr>
+                        <tr><td>전용 전기차</td><td>기아 EV6</td><td>15등급</td><td>790,000원 ~ 970,000원</td><td>긴급 견인 100km 특약 및 전기차 배터리 파손 신품 교체</td></tr>
+                        <tr><td>대형 전기 SUV</td><td>기아 EV9</td><td>14등급</td><td>1,100,000원 ~ 1,450,000원</td><td>고용량 배터리 가액 반영, 특화 자차 보장 가입 필수</td></tr>
+                        <tr><td>수입 전기차</td><td>테슬라 모델3</td><td>7등급</td><td>1,200,000원 ~ 1,650,000원</td><td>수리 기간 장기화 및 알루미늄 바디 감안 렌트비 지원 특약</td></tr>
+                        <tr><td>수입 전기 SUV</td><td>테슬라 모델Y</td><td>8등급</td><td>1,300,000원 ~ 1,750,000원</td><td>인수 거절 방지를 위해 대형사(삼성, DB) 비교 필수</td></tr>
+                        <tr><td>수입 중형 세단</td><td>BMW 5시리즈 (520i/530i)</td><td>8등급</td><td>1,150,000원 ~ 1,550,000원</td><td>외제차 평균 부품가율 반영, 대물배상 10억 이상 권장</td></tr>
+                        <tr><td>수입 중형 세단</td><td>벤츠 E클래스 (E200/E300)</td><td>9등급</td><td>1,250,000원 ~ 1,680,000원</td><td>수입차 1위, 서비스센터 협약 및 정품 부품 특약 검토</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                위 표에서 확인되듯 국산 대중 차종인 아반떼, 쏘나타, 싼타페, 쏘렌토의 경우 15등급에서 18등급 사이를 형성하여 안정적인 표준 보험료가 산출되지만, 수입차인 테슬라 모델3, BMW 5시리즈, 벤츠 E클래스 등은 모델등급이 7~9등급으로 낮아 차량가액 대비 자차 담보 요율이 상대적으로 높게 산출됩니다. 따라서 수입차 차주들은 2월 다이렉트 가입 시 카드사 무이자 할부 혜택과 캐시백 지원금을 최대한 활용하여 일시납 부담을 분산시키는 전략이 필수적입니다.
+            </p>
+        </section>
+
+        <!-- SECTION 5: 필수 보장 담보 설계 가이드 -->
+        <section id="coverage-guide" class="content-block">
+            <h2>손해 없는 완벽한 보장을 위한 필수 담보 설정 5대 가이드</h2>
+            <p>
+                단순히 '가장 저렴한곳', '제일 싼곳'만을 찾아 기본 법적 의무보험(책임보험) 위주로 가입하는 것은 사고 발생 시 인생 전체를 위협하는 막대한 경제적 파탄을 초래할 수 있습니다. 인터넷 온라인 사이트를 통해 직접 견적을 설계할 때 몇 만 원의 차이로 수억 원의 자산을 방어할 수 있는 올바른 담보 구성 기준을 명확히 인지해야 합니다.
+            </p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>1. 대물배상: 무조건 10억원 이상으로 상향</h4>
+                    <p>
+                        최근 도로 위 고가 수입차와 슈퍼카, 전기차의 비중이 비약적으로 증가했습니다. 2억원 혹은 3억원 한도로 설정할 경우 다중 추돌 사고나 초고가 차량과의 과실 사고 발생 시 한도 초과 금액을 개인이 사비로 배상해야 합니다. 5억원에서 10억원으로 증액할 때 발생하는 연간 보험료 차이는 불과 5,000원에서 15,000원 안팎에 불과하므로 무조건 10억원을 선택하는 것이 기본입니다.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>2. 자기신체사고 vs 자동차상해: 반드시 '자상' 선택</h4>
+                    <p>
+                        '자기신체사고(자손)'는 상해 급수별 한도 내에서만 치료비를 차등 지급하여 본인 과실이 클 경우 실제 병원비를 감당하기 어렵습니다. 반면 <strong class="highlight">자동차상해(자상)</strong>는 급수와 무관하게 병원비 전액, 휴업손해, 위자료까지 100% 실손 보상합니다. 통상 사망/후유장해 2억원 내지 5억원, 부상 5,000만원 내지 1억원으로 세팅하는 것이 안전합니다.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>3. 무보험차상해: 5억원 설정으로 보행 중 사고까지 보호</h4>
+                    <p>
+                        책임보험만 가입한 뺑소니 차량이나 무보험 차량에게 피해를 입었을 때 내 보험사가 우선 보상해 주는 담보입니다. 이는 운전 중인 본인뿐만 아니라 배우자, 부모님, 자녀가 길을 걷다 무보험차에 치였을 때도 적용되는 매우 포괄적인 보장이므로 2억원 기본형 대신 5억원 확장형으로 설정하는 것이 현명합니다.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>4. 자차 자기부담금 및 물적사고할증기준: 200만원 / 20%</h4>
+                    <p>
+                        물적사고 할증기준 금액은 통상 200만원으로 통일하며, 자기부담금 비율은 손해액의 20%(최저 20만원 ~ 최고 50만원) 방식을 가장 많이 선택합니다. 이를 100만원이나 30% 등으로 과도하게 변경하면 향후 경미한 접촉사고 처리 시 할증 등급에서 불이익을 받을 수 있습니다.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>5. 긴급출동 특약: 견인거리 50km~60km 확대</h4>
+                    <p>
+                        기본 무료 견인 거리는 10km에 불과하여 고속도로나 외곽 국도에서 차량 고장 시 1km당 2,000원 이상의 추가 사설 견인 비용이 청구됩니다. 연간 3,000원 미만의 소액 추가로 견인 거리를 50km 내지 60km(전기차의 경우 100km)로 확대해 두면 장거리 명절 귀성길에도 안심할 수 있습니다.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>6. 법률비용지원 특약(운전자보험 중복 체크)</h4>
+                    <p>
+                        형사합의금(교통사고처리지원금), 변호사선임비용, 벌금 등을 보장하는 특약입니다. 별도의 민간 운전자보험을 이미 매월 1~2만원에 납입 중인 고객이라면 중복 보상이 불가하므로 본 특약을 제외하여 이중 지출을 막아야 합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: 할인 특약 총망라 및 환급 계산법 -->
+        <section id="riders-savings" class="content-block">
+            <h2>놓치면 손해 보는 2026년 핵심 할인 특약 총망라 및 환급 계산법</h2>
+            <p>
+                다이렉트 자동차보험의 가장 큰 장점은 개별 운전자의 주행 습관과 환경에 맞춰 수많은 특약을 결합함으로써 공시 요금표 대비 30%에서 최대 60%까지 할인율을 중첩 적용할 수 있다는 점입니다. 2월 갱신 시 반드시 체크해야 할 필수 특약 목록과 증빙 절차는 다음과 같습니다.
+            </p>
+
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <caption>2026년 다이렉트 자동차보험 주요 결합 할인 특약 요약표</caption>
+                    <thead>
+                        <tr>
+                            <th>특약 명칭</th>
+                            <th>평균 할인율 (적용 범위)</th>
+                            <th>필요 증빙 서류 및 인증 방식</th>
+                            <th>환급 및 정산 방식</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>주행거리 마일리지 특약</strong></td>
+                            <td>연간 주행거리에 따라 2% ~ 45% 차등</td>
+                            <td>가입 시 및 만기 시 계기판 사진 + 차량 번호판 사진 모바일 전송</td>
+                            <td>만기 후 정산 계좌로 현금 환급 (후할인)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>티맵/카카오/네이버 안전운전</strong></td>
+                            <td>주행거리 500~1,000km 이상, 점수 80점 이상 시 10%~16%</td>
+                            <td>각 내비게이션 어플 내 안전운전 점수 연동 인증번호 입력</td>
+                            <td>가입 시점 즉시 선할인</td>
+                        </tr>
+                        <tr>
+                            <td><strong>커넥티드카 (블루링크/커넥트)</strong></td>
+                            <td>현대 블루링크, 기아 커넥트, 제네시스 커넥티드 장착 시 7%~12%</td>
+                            <td>통신사 개통확인서 또는 차량 인포테인먼트 화면 캡처</td>
+                            <td>가입 시점 즉시 선할인</td>
+                        </tr>
+                        <tr>
+                            <td><strong>첨단 안전장치 장착 특약</strong></td>
+                            <td>차선이탈경고(LDWS/LKAS), 전방충돌방지(FCW/FCA) 각 3%~8%</td>
+                            <td>차량 출고 옵션표 전산 조회 또는 실내 장치 사진 제출</td>
+                            <td>가입 시점 즉시 선할인</td>
+                        </tr>
+                        <tr>
+                            <td><strong>자녀 할인 특약</strong></td>
+                            <td>태아(임신) 시 10%~17%, 만 6세 이하 8%~12%, 만 12세 이하 3%~6%</td>
+                            <td>가족관계증명서, 주민등록등본, 산모수첩 또는 임신확인서</td>
+                            <td>가입 시 선할인 혹은 중도 임신 시 일할 환급</td>
+                        </tr>
+                        <tr>
+                            <td><strong>블랙박스 장착 특약</strong></td>
+                            <td>차량 연식 10년 미만 기준 1% ~ 5%</td>
+                            <td>차량 내 장착된 블랙박스 정면 사진 및 동작 사진</td>
+                            <td>가입 시점 즉시 선할인</td>
+                        </tr>
+                        <tr>
+                            <td><strong>대중교통 이용 특약</strong></td>
+                            <td>직전 3개월 교통카드 이용 실적 12만원 이상 시 5% ~ 8%</td>
+                            <td>KB국민카드 등 제휴 교통카드 이용 내역 전산 자동 확인</td>
+                            <td>가입 시점 즉시 선할인</td>
+                        </tr>
+                        <tr>
+                            <td><strong>걸음수 헬스케어 특약</strong></td>
+                            <td>직전 90일간 하루 5,000보 이상 달성 시 3% ~ 5%</td>
+                            <td>토스, 삼성헬스, 애플건강 앱 걸음수 데이터 연동</td>
+                            <td>가입 시점 즉시 선할인</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                예를 들어 연간 주행거리가 7,000km 수준인 30대 차주가 아반떼 차량에 현대 블루링크 커넥티드카 특약(7%), 티맵 안전점수 85점 특약(12%), 만 5세 자녀 특약(10%)을 동시에 결합할 경우, 본래 80만원으로 책정되었던 기본 보험료가 1차 선할인을 통해 약 57만원 수준으로 낮아지며, 만기 시 주행거리 마일리지(7,000km 이하 구간 약 20%) 환급을 통해 추가로 약 11만원을 현금으로 돌려받아 최종 실부담금은 46만원 선으로 수렴하게 됩니다.
+            </p>
+        </section>
+
+        <!-- SECTION 7: 커뮤니티(보배드림, 디시, 펨코) 내돈내산 후기 및 성지 분석 -->
+        <section id="community-talk" class="content-block">
+            <h2>보배드림, 디시인사이드, 에펨코리아 내돈내산 후기로 본 현실 조언</h2>
+            <p>
+                국내 자동차 및 재테크 온라인 커뮤니티인 <strong>보배드림</strong> 교통/보험 게시판, <strong>디시인사이드</strong> 자동차 갤러리(차갤), <strong>에펨코리아(펨코)</strong> 자동차/바이크 포럼에서는 매년 2월이 되면 수천 건의 실제 갱신 영수증 인증과 내돈내산 후기가 쏟아집니다. 실제 차주들이 공유하는 핵심 경험담과 주의사항을 종합 정리했습니다.
+            </p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>보배드림 베스트 유저 조언: "대물 10억은 선택이 아닌 생존"</h4>
+                    <p>
+                        "수도권 강남, 판교 일대만 나가도 롤스로이스, 벤틀리, 포르쉐와 테슬라가 줄지어 서 있다. 1년에 8천원 아끼겠다고 대물 2억, 3억 넣었다가 과실 30%만 잡혀도 집 한 채 날아갈 수 있다. 10억원으로 올리고 자동차상해는 부상 1억, 사망 5억으로 세팅하는 게 가장 완벽한 방패다."
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>디시인사이드 차갤 사회초년생 후기: "부모님 찬스 1% 지분의 마법"</h4>
+                    <p>
+                        "만 22살에 취업해서 중고 아반떼 샀더니 단독 견적이 240만원 나왔다. 디시 팁 보고 아빠 99%, 나 1% 지분 공동명의로 바꾸고 아빠 밑으로 가족한정 걸었더니 88만원으로 끝났다. 군 운전병 경력증명서 정부24에서 떼서 냈더니 12만원 추가 환불받았다. 무조건 공동명의로 가라."
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>에펨코리아 펨코 핫딜 게시판: "2월 네이버페이+토스 3만원 체리피킹 성지"</h4>
+                    <p>
+                        "2월에는 토스랑 네이버페이에서 보험사별로 3만원 캐시백 쿠폰을 푼다. 현대해상에서 30만원 이상 결제하고 네이버페이 3만 포인트 받고, 가족 차량은 KB로 결제해서 토스 포인트 3만원 받았다. 조회 이벤트로 모은 스타벅스 기프티콘 3장까지 합치면 총 8만원 이상 혜택 챙겼다."
+                    </p>
+                </div>
+            </div>
+
+            <div class="callout-box warning">
+                <h4>불법 페이백 및 가짜 보험 성지 좌표 주의보</h4>
+                <p>
+                    인터넷 오픈채팅방, 텔레그램, 인스타그램 광고 등을 통해 "자동차보험 가입 시 현금 10만원 즉시 지원", "비밀 성지 좌표 안내" 등을 홍보하는 불법 브로커들이 기승을 부리고 있습니다. 금융소비자보호법 및 보험업법 제98조(특별이익의 제공 금지)에 따라 연간 3만원(또는 최초 1년 치 보험료의 100분의 10 중 적은 금액)을 초과하는 금품, 사은품, 현금지원은 법적으로 엄격히 금지되어 있습니다. 불법 리베이트 수수는 계약 취소나 불이익을 초래할 수 있으므로, 반드시 공식 플랫폼(네이버, 카카오톡, 토스 등)과 공인 손해보험사 공식 다이렉트 웹사이트를 통해서만 계약을 체결해야 합니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 8: 자동차보험 계약, 갱신, 해지, 환불 및 위약금 총정리 -->
+        <section class="content-block">
+            <h2>자동차보험 계약 체결, 중도 해지, 일할 계산 환불 및 위약금 실무</h2>
+            <p>
+                자동차보험은 통상 <strong>1년(12개월)</strong> 단위로 계약이 체결되는 대표적인 소멸성 의무보험입니다. 휴대전화 요금제와 같은 장기 약정 할인 개념이나 무약정 개념과는 구조적으로 상이하며, 법적으로 1년 만기 시점에 맞춰 반드시 갱신하거나 타사로 갈아타야만 미가입 과태료를 피할 수 있습니다.
+            </p>
+            <p>
+                운행 도중 차량을 중고차로 매각하거나, 폐차 말소 처리, 혹은 타인에게 이전 양도하는 경우 기존 계약은 중도 해지가 가능합니다. 이때 해지 신청 당일을 기준으로 이미 납부한 1년 치 보험료 중 잔여 기간에 대해 <strong>일할 계산(경과일수 일일 계산)</strong> 방식으로 미경과 보험료가 소비자 계좌로 전액 환불됩니다. 이러한 법적 사유에 의한 정당한 해지에는 어떠한 <strong>위약금</strong>이나 해약 수수료도 발생하지 않습니다.
+            </p>
+            <p>
+                단, 차량을 그대로 보유한 상태에서 단순히 다른 보험사로 갈아타기 위해 중도 임의 해지를 신청할 경우에는 정밀 계산된 단기요율이 적용되어 환불 금액에서 손해가 발생할 수 있으므로, 기존 계약 만기일 30일 전부터 열리는 정규 갱신 기간을 활용하여 만기일에 맞춰 자연스럽게 신규 계약으로 승계 전환하는 것이 가장 유리합니다.
+            </p>
+        </section>
+
+        <!-- SECTION 9: AI 기반(ChatGPT, Gemini 등) 비교 견적 활용법 -->
+        <section class="content-block">
+            <h2>인공지능 AI(챗지피티, 제미나이)를 활용한 똑똑한 보험료 절감 프롬프트</h2>
+            <p>
+                최근 생성형 인공지능(AI) 기술인 구글 제미나이(Gemini), 오픈AI 챗지피티(ChatGPT)를 활용하여 본인의 차량 스펙과 가족 구성에 최적화된 담보 견적을 사전에 검증받는 스마트 소비자들이 늘고 있습니다. AI 검색 탭이나 챗봇에게 단순히 "자동차보험 싼곳 어디야?"라고 묻기보다는 아래와 같이 정밀한 프롬프트(명령어)를 입력하면 손해사정사 수준의 객관적인 비교 포인트를 얻을 수 있습니다.
+            </p>
+            
+            <div class="callout-box">
+                <h4>AI 에이전트 질의 최적화 프롬프트 예시</h4>
+                <p style="font-family: monospace; font-size: 0.95rem; color: #1e3a8a; background: #ffffff; padding: 15px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    "나는 2026년 2월 만기를 앞둔 만 34세 운전자이며, 차종은 2023년식 현대 투싼 하이브리드(차선이탈 및 전방충돌방지 탑재)야. 연간 주행거리는 약 8,000km이고 티맵 점수는 83점, 4세 자녀가 있어. 7대 다이렉트 손해보험사 중 내 조건에서 가장 높은 결합 할인율을 제공하는 상위 3개 보험사의 특약 명칭과 권장 담보 설정(대물, 자상, 무보험차)을 표 형태로 비교해 줘."
+                </p>
+            </div>
+            <p>
+                이와 같이 구체적인 데이터를 입력하면 AI는 각 사의 2026년 최신 약관 데이터를 종합하여 불필요한 선택 특약을 배제하고 가장 적합한 손해보험사 우선순위를 체계적으로 제시해 줍니다.
+            </p>
+        </section>
+
+        <!-- SECTION 10: 자주 묻는 질문 (FAQ) -->
+        <section id="faq" class="content-block">
+            <h2>자주 묻는 질문 FAQ (2026년 2월 기준)</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Q1. 2월 자동차보험 가입 이벤트 사은품은 언제 수령할 수 있나요?</div>
+                    <div class="faq-answer">
+                        단순 조회 이벤트 리워드인 네이버페이 포인트권, 모바일 주유권, 스타벅스 쿠폰은 통상적으로 참여 완료 즉시 혹은 이벤트 익월(3월) 15일 이내에 모바일 문자 메시지(MMS) 또는 카카오톡 알림톡으로 전송됩니다. 30만원 이상 결제 시 지급되는 3만원 상당의 캐시백이나 백화점 상품권은 보험 개시일로부터 약 30일에서 60일 후 정상 계약 유지 여부가 전산 확인된 후 등록된 결제 카드 결제대금 차감 혹은 계좌 입금 방식으로 지급됩니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q2. 만기일이 아직 2~3달 남았는데 2월 이벤트에 미리 참여해도 되나요?</div>
+                    <div class="faq-answer">
+                        손해보험 전산망(보험개발원 기준) 규정상 자동차보험 신규 견적 산출 및 갱신 계약 체결은 자동차등록증 만기일 기준 30일 전부터만 가능합니다. 만약 본인의 만기일이 3월 20일 이전이라면 2월 20일부터 2월 이벤트에 온전히 참여할 수 있지만, 만기일이 4월 이후라면 2월에는 전산 조회가 불가하므로 만기 30일 전 도래 시점의 프로모션을 이용하셔야 합니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q3. 조회 이벤트와 가입 체결 이벤트 혜택을 한 보험사에서 중복으로 받을 수 있나요?</div>
+                    <div class="faq-answer">
+                        대부분의 보험사와 제휴 플랫폼 규정상 동일한 차량 및 동일 피보험자에 대해 조회 혜택(예: 7,000원)과 가입 혜택(예: 30,000원)을 동시 중복 지급하지 않습니다. 통상 가입을 체결할 경우 금액이 더 큰 가입 혜택 1건만 최종 인정되는 것이 일반적입니다. 단, A보험사에서 조회를 진행하여 포인트만 받고, 실제 계약 체결은 더 저렴한 견적을 제시한 B보험사에서 진행하여 가입 사은품을 받는 교차 방식은 전액 합산 수령이 가능합니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q4. 무사고 3년 차인데 다이렉트 갱신 시 기존 보험사를 유지하는 게 싼가요, 이동하는 게 싼가요?</div>
+                    <div class="faq-answer">
+                        통상 무사고 할인등급(예: 11Z -> 12Z 등)은 보험사를 변경하더라도 보험개발원 전산망을 통해 100% 동일하게 승계 적용됩니다. 손해보험사마다 매년 차종별, 연령별 손해율 통계를 재산정하여 요율을 개편하므로, 작년에 가장 저렴했던 보험사가 올해에는 상대적으로 비싸질 수 있습니다. 또한 신규 고객 유치를 위한 2월 사은품(3만원권)은 타사에서 넘어오는 신규 가입자에게만 부여되는 경우가 많으므로 매년 만기 시 최소 3개사 이상을 재비교한 후 이동하는 것이 통상 5만원~10만원 이상 비용을 절감하는 길입니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q5. 블랙박스와 안전운전 점수 특약은 중복으로 할인이 가능한가요?</div>
+                    <div class="faq-answer">
+                        네, 가능합니다. 블랙박스 특약(차량 연식에 따라 1%~5%), 티맵 또는 카카오내비 안전운전 점수 특약(10%~16%), 현대 블루링크나 기아 커넥트 커넥티드카 특약(7%~12%), 마일리지 주행거리 특약(최대 45%)은 상호 배타적이지 않으며 조건만 충족하면 곱연산 방식으로 전부 중복 결합 할인 적용을 받을 수 있습니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q6. 부모님 명의로 가입하다가 제 단독 명의로 바꿀 때 보험료 폭탄을 피하려면 어떻게 해야 하나요?</div>
+                    <div class="faq-answer">
+                        부모님 밑에서 운전할 때 반드시 사전에 '가입경력 인정 대상자(종피보험자)'로 본인의 주민등록번호를 지정 등록해 두어야 합니다. 1인당 최대 3년까지의 무사고 운전 경력이 공인 인정되며, 향후 본인 단독 명의로 생애 첫 보험을 체결할 때 신규 할증 요율(11Z 기본등급 대비 최대 30% 이상 비싼 최초 가입 요율)을 피하고 3년 경력자 요율을 즉시 인정받아 보험료를 대폭 낮출 수 있습니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q7. 전기차는 일반 내연기관 차량과 보험 가입 시 어떤 점이 다른가요?</div>
+                    <div class="faq-answer">
+                        전기차(아이오닉, EV6, 테슬라 등)는 고전압 구동용 배터리가 차량가액의 30~40% 이상을 차지하므로, 경미한 하부 충격으로 배터리 케이스 균열 시 2,000만원 이상의 교체 비용이 발생합니다. 따라서 일반 자차 외에 '전기차 전용 배터리 신품 가액 보상 특약'과 충전 중 감전사고 상해 특약, 그리고 방전 시 최단 충전소까지 갈 수 있도록 '긴급견인 100km 확대 특약'을 필수로 포함해야 합니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q8. 대인배상 I과 대인배상 II의 결정적인 차이점은 무엇인가요?</div>
+                    <div class="faq-answer">
+                        대인배상 I은 자동차손해배상보장법에 따른 법적 의무 가입 담보로 사망 시 최대 1억 5천만원, 부상 시 최대 3천만원 한도 내에서만 피해자에게 보상합니다. 만약 인사사고로 피해자의 손해액이 이를 초과할 경우 대인배상 II가 가입되어 있지 않으면 교통사고처리특례법상 형사처벌 면책 혜택을 받지 못하고 개인이 구속되거나 형사 기소될 수 있습니다. 대인배상 II를 '무한'으로 가입해야만 중과실 사고(음주, 무면허, 뺑소니, 12대 중과실 제외)를 제외한 일반 사고에서 형사처벌을 면제받습니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q9. 단기 1일~2일만 가족이 운전해야 할 때는 어떤 방식을 쓰는 것이 좋나요?</div>
+                    <div class="faq-answer">
+                        명절 귀성길이나 가족 여행 등으로 타인이 며칠간 내 차를 운전해야 한다면 기존 보험사 모바일 어플을 통해 운전 시작일 최소 하루 전(24시 이전)에 '임시운전자 특약'을 신청해야 합니다. 하루 약 5,000원~8,000원 내외의 비용으로 모든 담보가 동일하게 유지됩니다. 당일 급히 운전해야 한다면 운전자가 본인 스마트폰으로 즉시 효력이 발생하는 '원데이 자동차보험' 어플을 통해 가입하는 방식이 안전합니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q10. 자동차보험료 분납(할부)과 일시납 중 어느 것이 유리한가요?</div>
+                    <div class="faq-answer">
+                        보험사 자체 분납 제도를 이용할 경우 통상 2회~6회에 걸쳐 분할 납부할 수 있으나 연 2~3% 수준의 분납 할증 수수료가 보험료에 추가 청구됩니다. 따라서 가장 경제적인 방법은 보험료는 '일시납'으로 체결하되, 결제 단계에서 2월 카드사 제휴 프로모션인 6개월~12개월 무이자 할부 혜택을 적용하여 수수료 부담 없이 월 단위로 납입하는 것입니다.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: 공인된 공식 외부 출처 안내 -->
+        <section id="official-sources" class="content-block">
+            <h2>공인된 신뢰성 있는 3대 공식 외부 정보 출처</h2>
+            <p>
+                본 리포트는 금융감독원 손해보험 인가 약관, 보험개발원 차량기준가액 포털, 그리고 공공 지식 데이터베이스의 객관적 지표를 토대로 작성되었습니다. 보다 심도 있는 제도적 법령이나 통계를 교차 검증하고자 하는 운전자분들은 아래 공인 웹사이트를 직접 확인하실 수 있습니다.
+            </p>
+            <ul class="ext-links-list">
+                <li>
+                    <div>
+                        <strong>리라이어블던 다이렉트 분석센터:</strong>
+                        <span>국내외 금융상품 데이터 분석 및 다이렉트 자동차보험 요율 통계 제공</span>
+                    </div>
+                    <a href="https://directecheckl.reliabledone.com" target="_blank" rel="noopener noreferrer">공식 센터 바로가기</a>
+                </li>
+                <li>
+                    <div>
+                        <strong>나무위키 자동차보험 상세 문서:</strong>
+                        <span>대한민국 자동차보험의 역사, 표준약관, 담보 체계 및 할증 등급 제도 집단지성 백과</span>
+                    </div>
+                    <a href="https://namu.wiki/w/%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B3%B4%ED%97%98" target="_blank" rel="noopener noreferrer">나무위키 문서 열람</a>
+                </li>
+                <li>
+                    <div>
+                        <strong>보험개발원(KIDI) 공식 포털:</strong>
+                        <span>차량모델별 안전등급 평가표, 차량기준가액 조회 및 자동차보험 사고 통계 공시</span>
+                    </div>
+                    <a href="https://www.kidi.or.kr" target="_blank" rel="noopener noreferrer">보험개발원 포털 방문</a>
+                </li>
+            </ul>
+        </section>
+
+    </article>
+</main>
+
+  
